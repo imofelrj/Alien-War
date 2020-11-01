@@ -1,10 +1,10 @@
 #! /usr/bin/env python3
 # _*_ coding: utf-8 _*_
 
-import sys                                # for exit
 import pygame                             # pygame
 from var import Var                       # for const
 from ship import Ship                     # ship
+import game_functions as gf
 
 def main():
     pygame.init()
@@ -15,11 +15,7 @@ def main():
     ship = Ship(screen)
 
     while True:                           # Game Started
-        for event in pygame.event.get():  # Listening on keys
-            if event.type == pygame.QUIT:
-                sys.exit(0)               # QUIT
-        screen.fill(ai_var.bg_color)
-        ship.blit_me()
-        pygame.display.flip()
+        gf.check_events()                 # Check events
+        gf.update_screen(ai_var,screen,ship)
 
 main()
