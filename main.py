@@ -20,4 +20,8 @@ def main():
         gf.update_screen(
             ai_var,screen,ship)           # Update the screen
 
-main()
+try:
+    main()
+except Exception as e:
+    print("Sorry, there are some errors unexpectedly occured.")
+    print(e)
