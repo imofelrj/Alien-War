@@ -16,7 +16,7 @@ def main():
 
     while True:                           # Game Started
         gf.check_events(ship)             # Check events
-        ship.update()                     # Update the status of the ship
+        ship.update(ai_var)                     # Update the status of the ship
         gf.update_screen(
             ai_var,screen,ship)           # Update the screen
 

@@ -23,12 +23,12 @@ class Ship():
 
     def blit_me(self):
         self.screen.blit(self.image,self.rect)
-    def update(self):
-        if self.moving_right:
-            self.rect.centerx += 1
-        if self.moving_left:
-            self.rect.centerx -= 1
-        if self.moving_down:
-            self.rect.bottom += 1
-        if self.moving_up:
-            self.rect.bottom -= 1
+    def update(self,ai_var):
+        if self.moving_right and self.rect.right < ai_var.screen_width :
+            self.rect.centerx += ai_var.moving_velocity
+        if self.moving_left and self.rect.left > 0:
+            self.rect.centerx -= ai_var.moving_velocity
+        if self.moving_down and self.rect.bottom < ai_var.screen_height :
+            self.rect.bottom += ai_var.moving_velocity
+        if self.moving_up and self.rect.bottom > 0:
+            self.rect.bottom -= ai_var.moving_velocity
