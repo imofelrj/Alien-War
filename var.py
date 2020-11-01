@@ -12,3 +12,7 @@ class Var():
         self.screen_height = 800
         self.bg_color = (230,230,230)
         self.moving_velocity = 1.5
+        self.bullet_velocity = 1
+        self.bullet_width = 3
+        self.bullet_height = 15
+        self.bullet_color = (60,60,60)
