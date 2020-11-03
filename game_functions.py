@@ -21,6 +21,9 @@ def check_events_key_down(ship,event,ai_var,screen,bullets):
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_RIGHT:  # move right
             ship.moving_right = True
+        elif event.key == pygame.K_q:    # exit
+            pygame.quit()
+            sys.exit(0)
         elif event.key == pygame.K_LEFT: # move left
             ship.moving_left = True
         elif event.key == pygame.K_UP:   # move up
@@ -34,15 +37,17 @@ def check_events_key_down(ship,event,ai_var,screen,bullets):
 def check_events(ship,ai_var,screen,bullets):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            pygame.quit()
             sys.exit(0)
         check_events_key_down(ship,event,ai_var,screen,bullets)
         check_events_key_up(ship,event)
 
-def update_screen(ai_var,screen,ship,bullets):
+def update_screen(ai_var,screen,ship,bullets,alien):
     screen.fill(ai_var.bg_color)
     for bullet in bullets.sprites():
         bullet.draw()
     ship.blit_me()
+    alien.blit_me()
     pygame.display.flip()
 
 def remove_bullets(bullets):
