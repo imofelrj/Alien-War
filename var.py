@@ -17,3 +17,5 @@ class Var():
         self.bullet_height = 15
         self.bullet_color = (60,60,60)
         self.bullet_maximum = 5
+        self.alien_maximum = 10
+        self.alien_velocity = 1

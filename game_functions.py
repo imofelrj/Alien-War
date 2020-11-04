@@ -3,6 +3,7 @@
 
 from ship import Ship
 from bullet import Bullet
+from alien import Alien
 import sys              # for exit
 import pygame
 
@@ -42,15 +43,21 @@ def check_events(ship,ai_var,screen,bullets):
         check_events_key_down(ship,event,ai_var,screen,bullets)
         check_events_key_up(ship,event)
 
-def update_screen(ai_var,screen,ship,bullets,alien):
+def update_screen(ai_var,screen,ship,bullets,aliens):
     screen.fill(ai_var.bg_color)
     for bullet in bullets.sprites():
         bullet.draw()
     ship.blit_me()
-    alien.blit_me()
+    for alien in aliens.sprites():
+        alien.draw()
     pygame.display.flip()
 
 def remove_bullets(bullets):
     for bullet in bullets.copy():
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
+
+def create_aliens(aliens,screen,ai_var):
+    for i in range(0,ai_var.alien_maximum):
+        new_alien = Alien(screen,ai_var)
+        aliens.add(new_alien)

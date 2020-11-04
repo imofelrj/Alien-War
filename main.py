@@ -4,7 +4,6 @@
 import pygame                             # pygame
 from var import Var                       # for const
 from ship import Ship                     # ship
-from alien import Alien
 import game_functions as gf               # Game functions
 from pygame.sprite import Group
 
@@ -16,15 +15,17 @@ def main():
     pygame.display.set_caption("Alien War")
     ship = Ship(screen)
     bullets = Group()
-    alien = Alien(screen,ai_var) 
+    aliens = Group()
+    gf.create_aliens(aliens,screen,ai_var)
 
     while True:                           # Game Started
         gf.check_events(ship,ai_var,screen,bullets)             # Check events
         ship.update(ai_var)                 # Update the status of the ship
         bullets.update()  
+        aliens.update()
         gf.remove_bullets(bullets)  
         gf.update_screen(
-            ai_var,screen,ship,bullets,alien)           # Update the screen
+            ai_var,screen,ship,bullets,aliens)           # Update the screen
 
 try:
     main()
@@ -32,3 +33,5 @@ except Exception as e:
     print("Sorry, there are some errors unexpectedly occured.")
     print("Here are the errors report: ")
     print(e)
+
+print("Thanks for playing!")
