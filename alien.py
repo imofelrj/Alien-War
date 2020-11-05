@@ -13,7 +13,7 @@ class Alien(Sprite):
         self.rect = self.image.get_rect()
         self.velocity = ai_var.alien_velocity
         self.rect.x = randint(0,ai_var.screen_width)
-        self.rect.y = randint(0,ai_var.screen_height // 2)
+        self.rect.y = randint(0,ai_var.screen_height // 4)
     
     def draw(self):
         self.screen.blit(self.image,self.rect)

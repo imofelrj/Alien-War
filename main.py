@@ -26,7 +26,7 @@ def main():
         gf.remove(bullets,aliens,screen)  
         gf.update_screen(
             ai_var,screen,ship,bullets,aliens)           # Update the screen
-"""
+
 try:
     main()
 except Exception as e:
@@ -35,5 +35,3 @@ except Exception as e:
     print(e)
 
 print("Thanks for playing!")
-"""
-main()

@@ -6,6 +6,10 @@ from alien import Alien
 import sys              # for exit
 import pygame
 
+def fire(ai_var,screen,ship,bullets):
+    new_bullet = Bullet(ai_var,screen,ship)
+    bullets.add(new_bullet)
+
 def check_events_key_up(ship,event):
     if event.type == pygame.KEYUP:
         if event.key == pygame.K_RIGHT:
@@ -31,8 +35,7 @@ def check_events_key_down(ship,event,ai_var,screen,bullets):
         elif event.key == pygame.K_DOWN: # move down
             ship.moving_down = True
         elif event.key == pygame.K_SPACE and len(bullets) < ai_var.bullet_maximum: # fire
-            new_bullet = Bullet(ai_var,screen,ship)
-            bullets.add(new_bullet)
+            fire(ai_var,screen,ship,bullets)
 
 def check_events(ship,ai_var,screen,bullets):
     for event in pygame.event.get():
