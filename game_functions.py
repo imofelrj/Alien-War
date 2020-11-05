@@ -1,7 +1,6 @@
 #! /usr/bin/env python3
 # _*_ coding: utf-8 _*_
 
-from ship import Ship
 from bullet import Bullet
 from alien import Alien
 import sys              # for exit
@@ -52,12 +51,17 @@ def update_screen(ai_var,screen,ship,bullets,aliens):
         alien.draw()
     pygame.display.flip()
 
-def remove_bullets(bullets):
+def remove(bullets,aliens,screen):
     for bullet in bullets.copy():
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
+    for alien in aliens.sprites():
+        if alien.rect.bottom >= screen.get_rect().bottom:
+            aliens.remove(alien)
 
-def create_aliens(aliens,screen,ai_var):
-    for i in range(0,ai_var.alien_maximum):
-        new_alien = Alien(screen,ai_var)
-        aliens.add(new_alien)
+def update_aliens(aliens,screen,ai_var,bullets):
+    collisions = pygame.sprite.groupcollide(bullets,aliens,True,True)
+    if len(aliens) == 0:
+        for i in range(0,ai_var.alien_maximum):
+            new_alien = Alien(screen,ai_var)
+            aliens.add(new_alien)

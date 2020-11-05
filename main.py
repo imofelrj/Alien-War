@@ -16,17 +16,17 @@ def main():
     ship = Ship(screen)
     bullets = Group()
     aliens = Group()
-    gf.create_aliens(aliens,screen,ai_var)
 
     while True:                           # Game Started
         gf.check_events(ship,ai_var,screen,bullets)             # Check events
         ship.update(ai_var)                 # Update the status of the ship
         bullets.update()  
         aliens.update()
-        gf.remove_bullets(bullets)  
+        gf.update_aliens(aliens,screen,ai_var,bullets)
+        gf.remove(bullets,aliens,screen)  
         gf.update_screen(
             ai_var,screen,ship,bullets,aliens)           # Update the screen
-
+"""
 try:
     main()
 except Exception as e:
@@ -35,3 +35,5 @@ except Exception as e:
     print(e)
 
 print("Thanks for playing!")
+"""
+main()
