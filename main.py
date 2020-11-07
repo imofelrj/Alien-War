@@ -5,6 +5,7 @@ import pygame                             # pygame
 from var import Var                       # for const
 from ship import Ship                     # ship
 from scores import Scores
+from sounds import Sounds
 import game_functions as gf               # Game functions
 from pygame.sprite import Group
 
@@ -15,13 +16,14 @@ screen = pygame.display.set_mode(
 pygame.display.set_caption("Alien War")
 ship = Ship(screen)
 sc = Scores(screen,ai_var)
+sd = Sounds()
 timer = pygame.time.Clock()
 bullets = Group()
 aliens = Group()
 
 def main():
     while sc.game_active:                           # Game Started
-        gf.check_events(ship,ai_var,screen,bullets,sc,aliens)             # Check events
+        gf.check_events(ship,ai_var,screen,bullets,sc,sd)             # Check events
         ship.update(ai_var)                 # Update the status of the ship
         bullets.update()  
         aliens.update(sc)
@@ -38,5 +40,5 @@ except Exception as e:
     print("Here are the errors report: ")
     print(e)
 
-print("You have gained " + str(sc.score) + "points.")
+print("You have gained " + str(sc.score) + " points.")
 print("Thanks for playing!")

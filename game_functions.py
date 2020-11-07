@@ -3,8 +3,6 @@
 
 from bullet import Bullet
 from alien import Alien
-from scores import Scores
-import sys              # for exit
 import pygame
 from time import sleep
 
@@ -23,13 +21,12 @@ def check_events_key_up(ship,event):
         elif event.key == pygame.K_DOWN:
             ship.moving_down = False
 
-def check_events_key_down(ship,event,ai_var,screen,bullets,scores,aliens):
+def check_events_key_down(ship,event,ai_var,screen,bullets,scores,sounds):
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_RIGHT:  # move right
             ship.moving_right = True
         elif event.key == pygame.K_q:    # exit
-            pygame.quit()
-            sys.exit(0)
+            scores.game_active = False
         elif event.key == pygame.K_LEFT: # move left
             ship.moving_left = True
         elif event.key == pygame.K_UP:   # move up
@@ -38,20 +35,21 @@ def check_events_key_down(ship,event,ai_var,screen,bullets,scores,aliens):
             ship.moving_down = True
         elif event.key == pygame.K_SPACE and len(bullets) < ai_var.bullet_maximum: # fire
             fire(ai_var,screen,ship,bullets)
+            sounds.bullet.play()
             ai_var.judge = True
         elif event.key == pygame.K_p and scores.score >= ai_var.p_points:
             scores.score -= ai_var.p_points
             ai_var.bullet_width = 600    # big bullet
             fire(ai_var,screen,ship,bullets)
+            sounds.bullet.play()
             ai_var.judge = False
             ai_var.bullet_width = 3      # reset
 
-def check_events(ship,ai_var,screen,bullets,scores,aliens):
+def check_events(ship,ai_var,screen,bullets,scores,sounds):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit(0)
-        check_events_key_down(ship,event,ai_var,screen,bullets,scores,aliens)
+            scores.game_active = False
+        check_events_key_down(ship,event,ai_var,screen,bullets,scores,sounds)
         check_events_key_up(ship,event)
 
 def update_screen(ai_var,screen,ship,bullets,aliens,scores):
