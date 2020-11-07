@@ -19,3 +19,4 @@ class Var():
         self.bullet_maximum = 5
         self.alien_maximum = 7
         self.alien_velocity = 1
+        self.alien_points = 10

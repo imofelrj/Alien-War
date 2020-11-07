@@ -4,6 +4,7 @@
 import pygame                             # pygame
 from var import Var                       # for const
 from ship import Ship                     # ship
+from scores import Scores
 import game_functions as gf               # Game functions
 from pygame.sprite import Group
 
@@ -14,6 +15,7 @@ def main():
         [ai_var.screen_width,ai_var.screen_height])
     pygame.display.set_caption("Alien War")
     ship = Ship(screen)
+    sc = Scores(screen)
     bullets = Group()
     aliens = Group()
 
@@ -22,11 +24,11 @@ def main():
         ship.update(ai_var)                 # Update the status of the ship
         bullets.update()  
         aliens.update()
-        gf.update_aliens(aliens,screen,ai_var,bullets)
+        gf.update_aliens(aliens,screen,ai_var,bullets,sc)
         gf.remove(bullets,aliens,screen)  
         gf.update_screen(
-            ai_var,screen,ship,bullets,aliens)           # Update the screen
-
+            ai_var,screen,ship,bullets,aliens,sc)           # Update the screen
+"""
 try:
     main()
 except Exception as e:
@@ -35,3 +37,5 @@ except Exception as e:
     print(e)
 
 print("Thanks for playing!")
+"""
+main()
