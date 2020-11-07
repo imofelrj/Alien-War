@@ -5,13 +5,13 @@ import pygame.font
 
 class Scores():
     def __init__(self,screen):
-        self.scores = 0
+        self.score = 0
         self.screen = screen
     
     def increase(self,num):
-        self.scores += num
+        self.score += num
     def show_score(self):
-        draw_str = "Points: " + str(self.scores)
+        draw_str = "Points: " + str(self.score)
         font = pygame.font.SysFont("Times", 24)
         text = font.render(draw_str,True,(0,0,0)) # show black font
         text_rect = text.get_rect()

@@ -20,3 +20,6 @@ class Var():
         self.alien_maximum = 7
         self.alien_velocity = 1
         self.alien_points = 10
+        self.p_points = 100
+        self.judge = True
+        self.fps = 80

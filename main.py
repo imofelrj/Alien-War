@@ -16,11 +16,12 @@ def main():
     pygame.display.set_caption("Alien War")
     ship = Ship(screen)
     sc = Scores(screen)
+    timer = pygame.time.Clock()
     bullets = Group()
     aliens = Group()
 
     while True:                           # Game Started
-        gf.check_events(ship,ai_var,screen,bullets)             # Check events
+        gf.check_events(ship,ai_var,screen,bullets,sc,aliens)             # Check events
         ship.update(ai_var)                 # Update the status of the ship
         bullets.update()  
         aliens.update()
@@ -28,7 +29,7 @@ def main():
         gf.remove(bullets,aliens,screen)  
         gf.update_screen(
             ai_var,screen,ship,bullets,aliens,sc)           # Update the screen
-"""
+        timer.tick(ai_var.fps)                     # fps
 try:
     main()
 except Exception as e:
@@ -37,5 +38,3 @@ except Exception as e:
     print(e)
 
 print("Thanks for playing!")
-"""
-main()
