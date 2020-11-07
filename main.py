@@ -27,9 +27,8 @@ def main():
         ship.update(ai_var)                 # Update the status of the ship
         bullets.update()  
         aliens.update(sc)
-        gf.update_aliens(aliens,screen,ai_var,bullets,sc,ship)
+        gf.update_aliens(aliens,screen,ai_var,bullets,sc,ship,sd)
         gf.remove(bullets,aliens,screen)  
-        
         gf.update_screen(
             ai_var,screen,ship,bullets,aliens,sc)           # Update the screen
         timer.tick(ai_var.fps)                     # fps

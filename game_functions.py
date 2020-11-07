@@ -37,7 +37,7 @@ def check_events_key_down(ship,event,ai_var,screen,bullets,scores,sounds):
             fire(ai_var,screen,ship,bullets)
             sounds.bullet.play()
             ai_var.judge = True
-        elif event.key == pygame.K_p and scores.score >= ai_var.p_points:
+        elif event.key == pygame.K_b and scores.score >= ai_var.p_points:
             scores.score -= ai_var.p_points
             ai_var.bullet_width = 600    # big bullet
             fire(ai_var,screen,ship,bullets)
@@ -72,11 +72,12 @@ def remove(bullets,aliens,screen):
         if alien.rect.bottom >= screen.get_rect().bottom:
             aliens.remove(alien)
 
-def update_aliens(aliens,screen,ai_var,bullets,scores,ship):
+def update_aliens(aliens,screen,ai_var,bullets,scores,ship,sounds):
     collisions = pygame.sprite.groupcollide(bullets,aliens,ai_var.judge,True)
     if collisions:
         scores.score += ai_var.alien_points
         scores.killed += 1
+        sounds.enemy1_down.play()
     if len(aliens) == 0:
         for i in range(0,ai_var.alien_maximum):
             new_alien = Alien(screen,ai_var)
