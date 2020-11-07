@@ -2,7 +2,7 @@
 # _*_ coding: utf-8 _*_
 
 import pygame
-from random import randrange
+from random import randint
 from pygame.sprite import Sprite
 
 class Alien(Sprite):
@@ -12,10 +12,11 @@ class Alien(Sprite):
         self.image = pygame.image.load("images/alien.bmp")
         self.rect = self.image.get_rect()
         self.velocity = ai_var.alien_velocity
-        self.rect.x = randrange(0,ai_var.screen_width)
-        self.rect.y = randrange(-ai_var.screen_height // 4,0)
+        self.rect.x = randint(0,ai_var.screen_width)
+        self.rect.y = randint(-ai_var.screen_height // 4,0)
     
     def draw(self):
         self.screen.blit(self.image,self.rect)
-    def update(self):
+    def update(self,scores):
+        self.velocity = 1.1**(scores.level)
         self.rect.y += self.velocity

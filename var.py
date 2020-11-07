@@ -22,4 +22,5 @@ class Var():
         self.alien_points = 10
         self.p_points = 100
         self.judge = True
-        self.fps = 80
+        self.fps = 100
+        self.ship_limit = 3

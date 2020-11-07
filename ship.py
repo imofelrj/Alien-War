@@ -28,3 +28,5 @@ class Ship():
             self.rect.bottom += ai_var.moving_velocity
         if self.moving_up and self.rect.bottom > 0:
             self.rect.bottom -= ai_var.moving_velocity
+    def center_ship(self):
+        self.center = self.screen_rect.centerx

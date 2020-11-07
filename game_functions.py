@@ -6,6 +6,7 @@ from alien import Alien
 from scores import Scores
 import sys              # for exit
 import pygame
+from time import sleep
 
 def fire(ai_var,screen,ship,bullets):
     new_bullet = Bullet(ai_var,screen,ship)
@@ -61,6 +62,8 @@ def update_screen(ai_var,screen,ship,bullets,aliens,scores):
     for alien in aliens.sprites():
         alien.draw()
     scores.show_score()
+    scores.show_ship_num()
+    scores.show_level()
     pygame.display.flip()
 
 def remove(bullets,aliens,screen):
@@ -71,11 +74,24 @@ def remove(bullets,aliens,screen):
         if alien.rect.bottom >= screen.get_rect().bottom:
             aliens.remove(alien)
 
-def update_aliens(aliens,screen,ai_var,bullets,scores):
+def update_aliens(aliens,screen,ai_var,bullets,scores,ship):
     collisions = pygame.sprite.groupcollide(bullets,aliens,ai_var.judge,True)
     if collisions:
         scores.score += ai_var.alien_points
+        scores.killed += 1
     if len(aliens) == 0:
         for i in range(0,ai_var.alien_maximum):
             new_alien = Alien(screen,ai_var)
             aliens.add(new_alien)
+    if pygame.sprite.spritecollideany(ship,aliens):
+        ship_hit(scores,ship,aliens,bullets)
+
+def ship_hit(scores,ship,aliens,bullets):
+    if scores.ship_left > 0:
+        scores.ship_left -= 1
+        aliens.empty()
+        bullets.empty()
+        ship.center_ship()
+        sleep(0.5)
+    else:
+        scores.game_active = False
