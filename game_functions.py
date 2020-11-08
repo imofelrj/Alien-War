@@ -35,12 +35,20 @@ def check_events_key_down(ship,event,ai_var,screen,bullets,scores,sounds):
             ship.moving_down = True
         elif event.key == pygame.K_SPACE and len(bullets) < ai_var.bullet_maximum: # fire
             fire(ai_var,screen,ship,bullets)
+            scores.bullets_left -= 1
+            if scores.bullets_left <= 0:
+                scores.game_active = False
+                print("Game Over because bullets ran out.")
             sounds.bullet.play()
             ai_var.judge = True
         elif event.key == pygame.K_b and scores.score >= ai_var.p_points:
             scores.score -= ai_var.p_points
             ai_var.bullet_width = 600    # big bullet
             fire(ai_var,screen,ship,bullets)
+            scores.bullets_left -= 1
+            if scores.bullets_left <= 0:
+                scores.game_active = False
+                print("Game Over because bullets ran out.")
             sounds.bullet.play()
             ai_var.judge = False
             ai_var.bullet_width = 3      # reset
@@ -62,10 +70,11 @@ def update_screen(ai_var,screen,ship,bullets,aliens,scores):
     scores.show_score()
     scores.show_ship_num()
     scores.show_level()
+    scores.show_bullets_num()
     pygame.display.flip()
 
 def remove(bullets,aliens,screen):
-    for bullet in bullets.copy():
+    for bullet in bullets.sprites():
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
     for alien in aliens.sprites():
@@ -77,17 +86,19 @@ def update_aliens(aliens,screen,ai_var,bullets,scores,ship,sounds):
     if collisions:
         scores.score += ai_var.alien_points
         scores.killed += 1
+        scores.bullets_left += 3
         sounds.enemy1_down.play()
     if len(aliens) == 0:
         for i in range(0,ai_var.alien_maximum):
             new_alien = Alien(screen,ai_var)
             aliens.add(new_alien)
     if pygame.sprite.spritecollideany(ship,aliens):
-        ship_hit(scores,ship,aliens,bullets)
+        ship_hit(scores,ship,aliens,bullets,sounds)
 
-def ship_hit(scores,ship,aliens,bullets):
+def ship_hit(scores,ship,aliens,bullets,sounds):
     if scores.ship_left > 0:
         scores.ship_left -= 1
+        sounds.me_down.play()
         aliens.empty()
         bullets.empty()
         ship.center_ship()
