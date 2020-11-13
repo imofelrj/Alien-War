@@ -41,17 +41,25 @@ def check_events_key_down(ship,event,ai_var,screen,bullets,scores,sounds):
                 print("Game Over because bullets ran out.")
             sounds.bullet.play()
             ai_var.judge = True
-        elif event.key == pygame.K_b and scores.score >= ai_var.p_points:
-            scores.score -= ai_var.p_points
-            ai_var.bullet_width = 600    # big bullet
-            fire(ai_var,screen,ship,bullets)
-            scores.bullets_left -= 1
-            if scores.bullets_left <= 0:
-                scores.game_active = False
-                print("Game Over because bullets ran out.")
-            sounds.bullet.play()
-            ai_var.judge = False
-            ai_var.bullet_width = 3      # reset
+        elif event.key == pygame.K_b:
+            if scores.score >= ai_var.p_points:
+                scores.score -= ai_var.p_points
+                ai_var.bullet_width = 600    # big bullet
+                fire(ai_var,screen,ship,bullets)
+                scores.bullets_left -= 1
+                if scores.bullets_left <= 0:
+                    scores.game_active = False
+                    print("Game Over because bullets ran out.")
+                sounds.bullet.play()
+                ai_var.judge = False
+                ai_var.bullet_width = 3      # reset
+            else:
+                scores.show_str("You point is too low!")
+                sleep(0.5)
+        elif event.key == pygame.K_u and scores.score >= ai_var.s_points: # ship num plus 1
+            scores.score -= ai_var.s_points
+            scores.ship_left += 1
+            sounds.upgrade.play()
 
 def check_events(ship,ai_var,screen,bullets,scores,sounds):
     for event in pygame.event.get():

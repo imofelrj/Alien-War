@@ -10,3 +10,4 @@ class Sounds():
         self.enemy2_down = Sound("sounds/enemy2_down.wav")  # level 2
         self.enemy3_down = Sound("sounds/enemy3_down.wav")  # level 3
         self.me_down     = Sound("sounds/me_down.wav")      # ship down
+        self.upgrade     = Sound("sounds/upgrade.wav")      # upgrade

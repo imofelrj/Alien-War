@@ -32,12 +32,14 @@ def main():
         gf.update_screen(
             ai_var,screen,ship,bullets,aliens,sc)           # Update the screen
         timer.tick(ai_var.fps)                     # fps
-try:
-    main()
-except Exception as e:
-    print("Sorry, there are some errors unexpectedly occured.")
-    print("Here are the errors report: ")
-    print(e)
 
-print("You have gained " + str(sc.score) + " points.")
-print("Thanks for playing!")
+if __name__ == '__main__':
+    try:
+        main()
+    except Exception as e:
+        print("Sorry, there are some errors unexpectedly occured.")
+        print("Here are the errors report: ")
+        print(e)
+    else:
+        print("You have gained " + str(sc.score) + " points.")
+        print("Thanks for playing!")

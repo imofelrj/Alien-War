@@ -45,3 +45,11 @@ class Scores():
         text_rect.centerx = self.screen.get_rect().centerx * 0.7
         text_rect.y = 10
         self.screen.blit(text,text_rect)
+    def show_str(self,_str):
+        draw_str = str(_str)
+        font = pygame.font.SysFont("Times", 24)
+        text = font.render(draw_str,True,(0,0,0)) # show black font
+        text_rect = text.get_rect()
+        text_rect.centerx = self.screen.get_rect().centerx
+        text_rect.y = 10
+        self.screen.blit(text,text_rect)

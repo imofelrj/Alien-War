@@ -25,3 +25,4 @@ class Var():
         self.fps = 100
         self.ship_limit = 3
         self.bullets_limit = 30
+        self.s_points = 300
